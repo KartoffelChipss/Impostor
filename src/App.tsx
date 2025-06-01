@@ -3,6 +3,7 @@ import MainMenu from './components/MainMenu';
 import RevealWords from './components/RevealWords';
 import RevealImpostor from './components/RevealImpostor';
 import Header from './components/Header';
+import { getRecommendedCategories } from './data';
 
 export type GameState = 'mainMenu' | 'revealWords' | 'revealImposter';
 
@@ -11,6 +12,9 @@ const App = () => {
     const [players, setPlayers] = useState<string[]>([]);
     const [impostors, setImpostors] = useState<string[]>([]);
     const [goalWord, setGoalWord] = useState<string>('');
+    const [categoriesToUse, setCategoriesToUse] = useState<string[]>(
+        getRecommendedCategories()
+    );
     const [impostorHint, setImpostorHint] = useState<string>('');
     const [imposterAmount, setImposterAmount] = useState<number>(1);
 
@@ -27,6 +31,8 @@ const App = () => {
                     setImposterHint={setImpostorHint}
                     imposterAmount={imposterAmount}
                     setImposterAmount={setImposterAmount}
+                    categoriesToUse={categoriesToUse}
+                    setCategoriesToUse={setCategoriesToUse}
                 />
             )}
             {gameState === 'revealWords' && (

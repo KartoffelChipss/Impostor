@@ -14,12 +14,22 @@ interface WordEntry {
 export function getWordCategories(): string[] {
     return [
         'Alltag',
-        'Rund um die Welt',
         'Sport & Freizeit',
         'Unterhaltung',
         'Wissen & Schule',
         'Tiere',
+        'Rund um die Welt',
         'Uralte Wörter',
+    ];
+}
+
+export function getRecommendedCategories(): string[] {
+    return [
+        'Alltag',
+        'Sport & Freizeit',
+        'Unterhaltung',
+        'Wissen & Schule',
+        'Tiere',
     ];
 }
 
