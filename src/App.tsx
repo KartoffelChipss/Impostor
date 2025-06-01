@@ -9,9 +9,10 @@ export type GameState = 'mainMenu' | 'revealWords' | 'revealImposter';
 const App = () => {
     const [gameState, setGameState] = useState<GameState>('mainMenu');
     const [players, setPlayers] = useState<string[]>([]);
-    const [impostor, setImpostor] = useState<string>('');
+    const [impostors, setImpostors] = useState<string[]>([]);
     const [goalWord, setGoalWord] = useState<string>('');
     const [impostorHint, setImpostorHint] = useState<string>('');
+    const [imposterAmount, setImposterAmount] = useState<number>(1);
 
     return (
         <>
@@ -21,9 +22,11 @@ const App = () => {
                     setGameState={setGameState}
                     players={players}
                     setPlayers={setPlayers}
-                    setImposter={setImpostor}
+                    setImpostors={setImpostors}
                     setGoalWord={setGoalWord}
                     setImposterHint={setImpostorHint}
+                    imposterAmount={imposterAmount}
+                    setImposterAmount={setImposterAmount}
                 />
             )}
             {gameState === 'revealWords' && (
@@ -32,13 +35,13 @@ const App = () => {
                     players={players}
                     goalWord={goalWord}
                     imposterHint={impostorHint}
-                    imposter={impostor}
+                    impostors={impostors}
                 />
             )}
             {gameState === 'revealImposter' && (
                 <RevealImpostor
                     setGameState={setGameState}
-                    impostor={impostor}
+                    impostors={impostors}
                     players={players}
                 />
             )}

@@ -3,13 +3,17 @@ import type { FC } from 'preact/compat';
 import type { GameState } from '../App';
 import { User, UserPlus, X } from 'lucide-react';
 import { getRandomWord, getWordCategories } from '../data';
+import RangeSlider from './common/RangeSlider';
+import { shuffle } from '../util/shuffle';
 
 interface MainMenuProps {
     setGameState: (state: GameState) => void;
     setPlayers: (players: string[]) => void;
-    setImposter: (imposter: string) => void;
+    setImpostors: (imposters: string[]) => void;
     setGoalWord: (goalWord: string) => void;
     setImposterHint: (imposterHint: string) => void;
+    imposterAmount: number;
+    setImposterAmount: (amount: number) => void;
     players: string[];
 }
 
@@ -18,8 +22,10 @@ const MainMenu: FC<MainMenuProps> = ({
     setPlayers,
     players,
     setGoalWord,
-    setImposter,
+    setImpostors,
     setImposterHint,
+    imposterAmount,
+    setImposterAmount,
 }) => {
     const [newPlayerName, setNewPlayerName] = useState('');
     const MAX_NAME_LENGTH = 20;
@@ -41,9 +47,9 @@ const MainMenu: FC<MainMenuProps> = ({
             return;
         }
 
-        const imposterIndex = Math.floor(Math.random() * players.length);
-        setPlayers(players);
-        setImposter(players[imposterIndex]);
+        const impostors: string[] = shuffle(players).slice(0, imposterAmount);
+        setImpostors(impostors);
+
         const randomWord = getRandomWord(getWordCategories());
         setGoalWord(randomWord.goalWord);
         setImposterHint(randomWord.imposterHint);
@@ -77,6 +83,12 @@ const MainMenu: FC<MainMenuProps> = ({
                             </button>
                         </div>
                     ))}
+
+                    {players.length === 0 && (
+                        <div className="text-muted-foreground text-sm">
+                            Noch keine Spieler hinzugefügt.
+                        </div>
+                    )}
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -109,9 +121,24 @@ const MainMenu: FC<MainMenuProps> = ({
                     </button>
                 </div>
 
+                {players.length > 3 && (
+                    <>
+                        <h2 className="mt-4">Anzahl der Imposter</h2>
+
+                        <RangeSlider
+                            min="1"
+                            max={Math.max(1, Math.floor(players.length / 2))
+                                .toFixed(0)
+                                .toString()}
+                            value={imposterAmount}
+                            onChange={(value) => setImposterAmount(value)}
+                        />
+                    </>
+                )}
+
                 <button
                     onClick={handleGameStart}
-                    className="btn mt-auto"
+                    className="btn mt-4"
                     disabled={players.length < 3}
                     title={
                         players.length < 3

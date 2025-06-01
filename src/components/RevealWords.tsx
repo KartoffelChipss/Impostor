@@ -7,7 +7,7 @@ interface RevealWordsProps {
     goalWord: string;
     imposterHint: string;
     players: string[];
-    imposter: string;
+    impostors: string[];
     setGameState: (state: GameState) => void;
 }
 
@@ -16,7 +16,7 @@ const RevealWords: FC<RevealWordsProps> = ({
     goalWord,
     imposterHint,
     players,
-    imposter,
+    impostors,
 }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isFlipped, setIsFlipped] = useState(false);
@@ -64,7 +64,7 @@ const RevealWords: FC<RevealWordsProps> = ({
 
                     {/* Back */}
                     <div className="absolute w-full h-full backface-hidden rotate-y-180 rounded-xl shadow-xl flex flex-col justify-center gap-5 items-center text-2xl font-bold">
-                        {currentPlayer === imposter ? (
+                        {impostors.includes(currentPlayer) ? (
                             <Skull className="text-primary h-8 w-8" />
                         ) : (
                             <CircleCheck
@@ -73,7 +73,7 @@ const RevealWords: FC<RevealWordsProps> = ({
                             />
                         )}
                         <span className="text-center text-xl">
-                            {currentPlayer === imposter
+                            {impostors.includes(currentPlayer)
                                 ? 'Tipp: ' + imposterHint
                                 : goalWord}
                         </span>

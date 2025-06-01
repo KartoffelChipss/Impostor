@@ -4,13 +4,13 @@ import { MessageCircleQuestion, Skull } from 'lucide-react';
 
 interface RevealImpostorProps {
     setGameState: (state: GameState) => void;
-    impostor: string;
+    impostors: string[];
     players: string[];
 }
 
 const revealImpostor: FC<RevealImpostorProps> = ({
     setGameState,
-    impostor,
+    impostors,
     players,
 }) => {
     const [revealImpostor, setRevealImpostor] = useState(false);
@@ -19,15 +19,29 @@ const revealImpostor: FC<RevealImpostorProps> = ({
     return (
         <div className="flex flex-col grow">
             {revealImpostor ? (
-                <div className="flex flex-col gap-3 justify-center py-20 text-center grow">
-                    <span className="text-2xl text-primary font-semibold flex items-center justify-center gap-2 max-w-full">
-                        <Skull className="h-7 w-7" />
-                        {impostor}
-                    </span>
-                    <span className="text-sm text-secondary-foreground">
-                        war der Impostor!
-                    </span>
-                </div>
+                <>
+                    {impostors.length <= 1 ? (
+                        <div className="flex flex-col gap-3 justify-center py-20 text-center grow">
+                            <span className="text-2xl text-primary font-semibold flex items-center justify-center gap-2 max-w-full">
+                                <Skull className="h-7 w-7" />
+                                {impostors[0]}
+                            </span>
+                            <span className="text-sm text-secondary-foreground">
+                                war der Impostor!
+                            </span>
+                        </div>
+                    ) : (
+                        <div className="flex flex-col gap-3 justify-center py-20 text-center grow">
+                            <span className="text-2xl text-primary font-semibold flex items-center justify-center gap-2 max-w-full">
+                                <Skull className="h-7 w-7" />
+                                {impostors.join(', ')}
+                            </span>
+                            <span className="text-sm text-secondary-foreground">
+                                waren die Impostor!
+                            </span>
+                        </div>
+                    )}
+                </>
             ) : (
                 <div className="flex flex-col items-center justify-center py-20 grow">
                     <span className="text-2xl font-medium">
