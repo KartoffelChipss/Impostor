@@ -1,7 +1,14 @@
 const Header = () => {
     return (
         <header className="pb-6 flex items-center justify-between">
-            <h1 className="text-3xl font-bold">Impostor</h1>
+            <h1 className="text-3xl font-bold flex items-center gap-2">
+                <img
+                    src={'/Logo.svg'}
+                    alt="Impostor Logo"
+                    className="h-8 w-8"
+                />
+                Impostor
+            </h1>
             <a
                 href="https://github.com/KartoffelChipss/Impostor"
                 target="_blank"
