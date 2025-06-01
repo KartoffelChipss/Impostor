@@ -1,9 +1,9 @@
 const Header = () => {
     return (
         <header className="pb-6 flex items-center justify-between">
-            <h1 className="text-3xl font-bold">Imposter</h1>
+            <h1 className="text-3xl font-bold">Impostor</h1>
             <a
-                href="https://github.com/KartoffelChipss/Imposter"
+                href="https://github.com/KartoffelChipss/Impostor"
                 target="_blank"
                 rel="noopener noreferrer"
             >

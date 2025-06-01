@@ -2,30 +2,30 @@ import { useState, type FC } from 'preact/compat';
 import type { GameState } from '../App';
 import { MessageCircleQuestion, Skull } from 'lucide-react';
 
-interface RevealImposterProps {
+interface RevealImpostorProps {
     setGameState: (state: GameState) => void;
-    imposter: string;
+    impostor: string;
     players: string[];
 }
 
-const revealImposter: FC<RevealImposterProps> = ({
+const revealImpostor: FC<RevealImpostorProps> = ({
     setGameState,
-    imposter,
+    impostor,
     players,
 }) => {
-    const [revealImposter, setRevealImposter] = useState(false);
+    const [revealImpostor, setRevealImpostor] = useState(false);
     const randomPlayer = players[Math.floor(Math.random() * players.length)];
 
     return (
         <div className="flex flex-col grow">
-            {revealImposter ? (
+            {revealImpostor ? (
                 <div className="flex flex-col gap-3 justify-center py-20 text-center grow">
                     <span className="text-2xl text-primary font-semibold flex items-center justify-center gap-2 max-w-full">
                         <Skull className="h-7 w-7" />
-                        {imposter}
+                        {impostor}
                     </span>
                     <span className="text-sm text-secondary-foreground">
-                        war der Imposter!
+                        war der Impostor!
                     </span>
                 </div>
             ) : (
@@ -37,7 +37,7 @@ const revealImposter: FC<RevealImposterProps> = ({
                 </div>
             )}
 
-            {revealImposter ? (
+            {revealImpostor ? (
                 <button
                     onClick={() => setGameState('mainMenu')}
                     className="btn-secondary w-full"
@@ -46,14 +46,14 @@ const revealImposter: FC<RevealImposterProps> = ({
                 </button>
             ) : (
                 <button
-                    onClick={() => setRevealImposter(true)}
+                    onClick={() => setRevealImpostor(true)}
                     className="btn w-full"
                 >
-                    Imposter aufdecken
+                    Impostor aufdecken
                 </button>
             )}
         </div>
     );
 };
 
-export default revealImposter;
+export default revealImpostor;

@@ -1,7 +1,7 @@
 import { useState } from 'preact/hooks';
 import MainMenu from './components/MainMenu';
 import RevealWords from './components/RevealWords';
-import RevealImposter from './components/RevealImposter';
+import RevealImpostor from './components/RevealImpostor';
 import Header from './components/Header';
 
 export type GameState = 'mainMenu' | 'revealWords' | 'revealImposter';
@@ -9,9 +9,9 @@ export type GameState = 'mainMenu' | 'revealWords' | 'revealImposter';
 const App = () => {
     const [gameState, setGameState] = useState<GameState>('mainMenu');
     const [players, setPlayers] = useState<string[]>([]);
-    const [imposter, setImposter] = useState<string>('');
+    const [impostor, setImpostor] = useState<string>('');
     const [goalWord, setGoalWord] = useState<string>('');
-    const [imposterHint, setImposterHint] = useState<string>('');
+    const [impostorHint, setImpostorHint] = useState<string>('');
 
     return (
         <>
@@ -21,9 +21,9 @@ const App = () => {
                     setGameState={setGameState}
                     players={players}
                     setPlayers={setPlayers}
-                    setImposter={setImposter}
+                    setImposter={setImpostor}
                     setGoalWord={setGoalWord}
-                    setImposterHint={setImposterHint}
+                    setImposterHint={setImpostorHint}
                 />
             )}
             {gameState === 'revealWords' && (
@@ -31,14 +31,14 @@ const App = () => {
                     setGameState={setGameState}
                     players={players}
                     goalWord={goalWord}
-                    imposterHint={imposterHint}
-                    imposter={imposter}
+                    imposterHint={impostorHint}
+                    imposter={impostor}
                 />
             )}
             {gameState === 'revealImposter' && (
-                <RevealImposter
+                <RevealImpostor
                     setGameState={setGameState}
-                    imposter={imposter}
+                    impostor={impostor}
                     players={players}
                 />
             )}
